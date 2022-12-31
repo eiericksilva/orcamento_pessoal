@@ -1,19 +1,38 @@
 import React from "react";
 import { FormContainer } from "./styles";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    ano: yup.string().required("Ano é um dado obrigatório"),
+    mes: yup.string().required("Mês é um dado obrigatório"),
+    dia: yup.string().required("Dia é um dado obrigatório"),
+    tipo: yup.string().required("Tipo da despesa é um dado obrigatório"),
+    descricao: yup.string().required("Descrição é um dado obrigatório"),
+    valor: yup.string().required("Valor é um dado obrigatório"),
+  })
+  .required();
 
 const Form = ({ children }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  console.log(errors);
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
-      <input type="number" placeholder="Ano" {...register("ano")} />
+      <input placeholder="Ano" {...register("ano")} />
+      <span>{errors.ano?.message}</span>
+
       <select defaultValue="janeiro" {...register("mes")}>
         <option value="janeiro">Janeiro</option>
         <option value="fevereiro">Fevereiro</option>
@@ -28,7 +47,11 @@ const Form = ({ children }) => {
         <option value="novembro">Novembro</option>
         <option value="dezembro">Dezembro</option>
       </select>
-      <input type="text" placeholder="Dia" {...register("dia")} />
+      <span>{errors.mes?.message}</span>
+
+      <input placeholder="Dia" {...register("dia")} />
+      <span>{errors.dia?.message}</span>
+
       <select defaultValue="moradia" {...register("tipo")}>
         <option value="moradia">Moradia</option>
         <option value="alimentacao">Alimentação</option>
@@ -39,12 +62,15 @@ const Form = ({ children }) => {
         <option value="impostos">Impostos</option>
         <option value="lazer">Lazer</option>
       </select>
+      <span>{errors.tipo?.message}</span>
       <textarea
         id="descricao"
         placeholder="Descrição"
         {...register("descricao")}
       />
-      <input type="text" placeholder="R$" {...register("valor")} />
+      <span>{errors.descricao?.message}</span>
+      <input placeholder="R$" {...register("valor")} />
+      <span>{errors.valor?.message}</span>
       {children}
     </FormContainer>
   );

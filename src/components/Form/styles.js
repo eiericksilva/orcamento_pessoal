@@ -25,6 +25,8 @@ export const FormContainer = styled.form`
   button {
     background-color: #cc0000;
     color: #ffffff;
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
     &:hover {
       cursor: pointer;
       background-color: #cc0033;
