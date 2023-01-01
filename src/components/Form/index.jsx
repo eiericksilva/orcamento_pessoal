@@ -6,12 +6,27 @@ import * as yup from "yup";
 
 const schema = yup
   .object({
-    ano: yup.string().required("Ano é um dado obrigatório"),
+    ano: yup
+      .number()
+      .typeError("Ano deve ser um número")
+      .required("Ano é um dado obrigatório")
+      .positive()
+      .integer(),
     mes: yup.string().required("Mês é um dado obrigatório"),
-    dia: yup.string().required("Dia é um dado obrigatório"),
-    tipo: yup.string().required("Tipo da despesa é um dado obrigatório"),
-    descricao: yup.string().required("Descrição é um dado obrigatório"),
-    valor: yup.string().required("Valor é um dado obrigatório"),
+    dia: yup
+      .number()
+      .typeError("Dia deve ser um número")
+      .required("Dia é um dado obrigatório"),
+    tipo: yup
+      .string("Tipo da despesa deve ser um texto")
+      .required("Tipo da despesa é um dado obrigatório"),
+    descricao: yup
+      .string("Descrição deve ser um texto")
+      .required("Descrição é um dado obrigatório"),
+    valor: yup
+      .number()
+      .typeError("Valor deve ser um número")
+      .required("Valor é um dado obrigatório"),
   })
   .required();
 
@@ -19,21 +34,20 @@ const Form = ({ children }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
     console.log(data);
   };
-  console.log(errors);
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
-      <input placeholder="Ano" {...register("ano")} />
+      <input placeholder="Ano" name="ano" {...register("ano")} />
       <span>{errors.ano?.message}</span>
 
-      <select defaultValue="janeiro" {...register("mes")}>
+      <select defaultValue="janeiro" name="mes" {...register("mes")}>
         <option value="janeiro">Janeiro</option>
         <option value="fevereiro">Fevereiro</option>
         <option value="março">Março</option>
@@ -49,10 +63,10 @@ const Form = ({ children }) => {
       </select>
       <span>{errors.mes?.message}</span>
 
-      <input placeholder="Dia" {...register("dia")} />
+      <input placeholder="Dia" name="dia" {...register("dia")} />
       <span>{errors.dia?.message}</span>
 
-      <select defaultValue="moradia" {...register("tipo")}>
+      <select defaultValue="moradia" name="tipo" {...register("tipo")}>
         <option value="moradia">Moradia</option>
         <option value="alimentacao">Alimentação</option>
         <option value="transporte">Transporte</option>
@@ -66,10 +80,11 @@ const Form = ({ children }) => {
       <textarea
         id="descricao"
         placeholder="Descrição"
+        name="descricao"
         {...register("descricao")}
       />
       <span>{errors.descricao?.message}</span>
-      <input placeholder="R$" {...register("valor")} />
+      <input placeholder="R$" name="valor" {...register("valor")} />
       <span>{errors.valor?.message}</span>
       {children}
     </FormContainer>

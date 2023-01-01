@@ -16,10 +16,11 @@ export const FormContainer = styled.form`
     height: 50px;
     border: 1px solid #1a0000;
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 5px;
 
     &::placeholder {
       color: #1a0000;
+      opacity: 50%;
     }
   }
   button {
@@ -32,5 +33,13 @@ export const FormContainer = styled.form`
       background-color: #cc0033;
       transition: 0.3s;
     }
+  }
+
+  span {
+    color: #ff0000;
+    font-size: 12px;
+    position: relative;
+    top: -15px;
+    left: px;
   }
 `;
