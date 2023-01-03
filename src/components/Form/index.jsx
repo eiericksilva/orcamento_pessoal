@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FormContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,8 +10,8 @@ const schema = yup
       .number()
       .typeError("Ano deve ser um número")
       .required("Ano é um dado obrigatório")
-      .positive()
-      .integer(),
+      .positive("Ano deve ser um número positivo")
+      .integer("Ano deve ser um número inteiro"),
     mes: yup.string().required("Mês é um dado obrigatório"),
     dia: yup
       .number()
@@ -31,23 +31,39 @@ const schema = yup
   .required();
 
 const Form = ({ children }) => {
+  const [listaDespesas, setListaDespesas] = useState([]);
+  const onSubmit = (newRegister) => {
+    setListaDespesas([...listaDespesas, newRegister]);
+    console.log("item adicionado");
+    console.log(listaDespesas);
+    console.log(newRegister);
+  };
+
+  useEffect(() => {
+    console.log("Aplicação iniciada");
+  }, []);
+
+  useEffect(() => {
+    console.log("listaDespesas renderizada");
+  }, [listaDespesas]);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <input placeholder="Ano" name="ano" {...register("ano")} />
       <span>{errors.ano?.message}</span>
 
-      <select defaultValue="janeiro" name="mes" {...register("mes")}>
+      <select name="mes" {...register("mes")}>
+        <option value="" disabled>
+          Selecione o mês
+        </option>
         <option value="janeiro">Janeiro</option>
         <option value="fevereiro">Fevereiro</option>
         <option value="março">Março</option>
@@ -67,6 +83,9 @@ const Form = ({ children }) => {
       <span>{errors.dia?.message}</span>
 
       <select defaultValue="moradia" name="tipo" {...register("tipo")}>
+        <option value="" disabled>
+          Tipo da despesa
+        </option>
         <option value="moradia">Moradia</option>
         <option value="alimentacao">Alimentação</option>
         <option value="transporte">Transporte</option>

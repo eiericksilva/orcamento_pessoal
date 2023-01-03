@@ -17,17 +17,14 @@ export const FormContainer = styled.form`
     border: 1px solid #1a0000;
     padding: 10px;
     border-radius: 5px;
-
-    &::placeholder {
-      color: #1a0000;
-      opacity: 50%;
-    }
   }
+
   button {
     background-color: #cc0000;
     color: #ffffff;
     letter-spacing: 0.3rem;
     text-transform: uppercase;
+
     &:hover {
       cursor: pointer;
       background-color: #cc0033;
