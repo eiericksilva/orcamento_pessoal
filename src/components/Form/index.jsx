@@ -32,20 +32,30 @@ const schema = yup
 
 const Form = ({ children }) => {
   const [listaDespesas, setListaDespesas] = useState([]);
+  useEffect(() => {
+    getLocalStorage();
+  }, []);
+  /*   useEffect(() => {
+    saveLocalDespesas();
+  }, [listaDespesas]); */
+
   const onSubmit = (newRegister) => {
     setListaDespesas([...listaDespesas, newRegister]);
-    console.log("item adicionado");
-    console.log(listaDespesas);
-    console.log(newRegister);
+    saveLocalDespesas();
+  };
+  const saveLocalDespesas = () => {
+    localStorage.setItem("minhas_despesas", JSON.stringify(listaDespesas));
   };
 
-  useEffect(() => {
-    console.log("Aplicação iniciada");
-  }, []);
-
-  useEffect(() => {
-    console.log("listaDespesas renderizada");
-  }, [listaDespesas]);
+  const getLocalStorage = () => {
+    let localDespesas = localStorage.getItem("minhas_despesas");
+    if (!localDespesas) {
+      localStorage.setItem("minhas_despesas", JSON.stringify([]));
+    } else {
+      localDespesas = JSON.parse(localDespesas);
+      setListaDespesas(localDespesas);
+    }
+  };
 
   const {
     register,
