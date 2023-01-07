@@ -15,8 +15,17 @@ export const FormContainer = styled.form`
     font-size: 1rem;
     height: 50px;
     border: 1px solid #1a0000;
+    outline: 1px solid #1a0000;
     padding: 10px;
     border-radius: 5px;
+  }
+  input,
+  select,
+  textarea {
+    &:focus {
+      outline: 2px solid red;
+      border: none;
+    }
   }
 
   button {

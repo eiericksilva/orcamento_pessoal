@@ -5,9 +5,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Form>
-        <button type="submit">Pesquisar</button>
-      </Form>
+      <Form />
     </div>
   );
 };

@@ -3,6 +3,8 @@ import { FormContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useDialogContext } from "../../context/DialogContext";
+import DialogComponent from "../Dialog/DialogComponent";
 
 const schema = yup
   .object({
@@ -31,14 +33,24 @@ const schema = yup
   .required();
 
 const Form = ({ children }) => {
+  const { openDialog } = useDialogContext();
+  const displayLogUser = () => {
+    if (isValid) {
+      openDialog({
+        message: "🔥" + "Despesa cadastrada com sucesso!",
+        title: "Sucesso!",
+      });
+    } else {
+      openDialog({
+        message: "😠" + "Não foi possível cadastrar despesa no momento",
+        title: "Falha!",
+      });
+    }
+  };
   const [listaDespesas, setListaDespesas] = useState([]);
   useEffect(() => {
     getLocalStorage();
   }, []);
-  /*   useEffect(() => {
-    saveLocalDespesas();
-  }, [listaDespesas]); */
-
   const onSubmit = (newRegister) => {
     setListaDespesas([...listaDespesas, newRegister]);
     saveLocalDespesas();
@@ -46,7 +58,6 @@ const Form = ({ children }) => {
   const saveLocalDespesas = () => {
     localStorage.setItem("minhas_despesas", JSON.stringify(listaDespesas));
   };
-
   const getLocalStorage = () => {
     let localDespesas = localStorage.getItem("minhas_despesas");
     if (!localDespesas) {
@@ -60,7 +71,7 @@ const Form = ({ children }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -115,7 +126,11 @@ const Form = ({ children }) => {
       <span>{errors.descricao?.message}</span>
       <input placeholder="R$" name="valor" {...register("valor")} />
       <span>{errors.valor?.message}</span>
-      {children}
+
+      <button onClick={displayLogUser} type="submit">
+        Registrar
+      </button>
+      <DialogComponent />
     </FormContainer>
   );
 };
