@@ -1,10 +1,12 @@
 import React from "react";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { useDialogContext } from "../../context/DialogContext";
 
 const DialogComponent = () => {
@@ -15,7 +17,7 @@ const DialogComponent = () => {
   return (
     <Dialog open={visible}>
       <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ bgcolor: "background.default" }}>
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>

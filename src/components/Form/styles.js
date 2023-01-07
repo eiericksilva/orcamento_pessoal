@@ -6,37 +6,44 @@ export const FormContainer = styled.form`
   gap: 16px;
   padding: 20px;
   width: 50%;
-  margin: 0 auto;
+  margin: 20px auto;
+  border-radius: 12px;
+  background-color: #132f4c;
 
   input,
   select,
   textarea,
   button {
+    color: #ffffff;
     font-size: 1rem;
     height: 50px;
     border: 1px solid #1a0000;
     outline: 1px solid #1a0000;
     padding: 10px;
     border-radius: 5px;
+    border: 1px solid #ffffff;
+    background: none;
+    outline: none;
   }
   input,
   select,
   textarea {
     &:focus {
-      outline: 2px solid red;
+      outline: 2px solid #0059b2;
       border: none;
     }
   }
 
   button {
-    background-color: #cc0000;
+    background-color: #0071e2;
     color: #ffffff;
     letter-spacing: 0.3rem;
     text-transform: uppercase;
+    border: none;
 
     &:hover {
       cursor: pointer;
-      background-color: #cc0033;
+      background-color: #0059b2;
       transition: 0.3s;
     }
   }
