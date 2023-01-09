@@ -24,6 +24,10 @@ export const FormContainer = styled.form`
     border: 1px solid #ffffff;
     background: none;
     outline: none;
+
+    &::placeholder {
+      color: #ffffff;
+    }
   }
   input,
   select,
@@ -50,9 +54,9 @@ export const FormContainer = styled.form`
 
   span {
     color: #ff0000;
-    font-size: 12px;
+    font-size: 16px;
     position: relative;
-    top: -15px;
-    left: px;
+    top: -10px;
+    left: 7px;
   }
 `;

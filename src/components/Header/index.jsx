@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, LogoContainer, ListButtons } from "./styles";
 import Logo from "../../assets/images/eiericksilva.png";
 
-const Header = () => {
+const Header = ({ page, path }) => {
   return (
     <Container>
       <LogoContainer>
@@ -11,7 +11,7 @@ const Header = () => {
       </LogoContainer>
       <ListButtons>
         <li>
-          <Link to="/">Home</Link>
+          <Link to={path}>{page}</Link>
         </li>
       </ListButtons>
     </Container>
