@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
-import { Link } from "@mui/material";
 import { FormContainer } from "../components/Form/styles";
 import Table from "../components/Table";
+import { useDespesasContext } from "../context/DespesasContext";
 
 const Consulta = () => {
   return (

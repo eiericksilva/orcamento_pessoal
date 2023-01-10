@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDialogContext } from "../../context/DialogContext";
 import DialogComponent from "../Dialog/DialogComponent";
+import { useDespesasContext } from "../../context/DespesasContext";
 
 const schema = yup
   .object({
@@ -33,6 +34,7 @@ const schema = yup
   .required();
 
 const Form = ({ children }) => {
+  const { listaDespesas, setListaDespesas } = useDespesasContext();
   const { openDialog } = useDialogContext();
   const displayLogUser = () => {
     if (isValid) {
@@ -47,7 +49,6 @@ const Form = ({ children }) => {
       });
     }
   };
-  const [listaDespesas, setListaDespesas] = useState([]);
   useEffect(() => {
     getLocalStorage();
   }, []);

@@ -3,7 +3,7 @@ import Form from "../components/Form";
 import Header from "../components/Header";
 const Home = () => {
   return (
-    <div style={{ display: flex, flexDirection: column }}>
+    <div>
       <Header page="Consulta" path="/consulta" />
       <Form />
     </div>
