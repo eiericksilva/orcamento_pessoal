@@ -20,24 +20,14 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Data 1</td>
-            <td>Tipo 1</td>
-            <td>Descrição 1</td>
-            <td>Valor 1</td>
-          </tr>
-          <tr>
-            <td>Data 2</td>
-            <td>Tipo 2</td>
-            <td>Descrição 2</td>
-            <td>Valor 2</td>
-          </tr>
-          <tr>
-            <td>Data 3</td>
-            <td>Tipo 3</td>
-            <td>Descrição 3</td>
-            <td>Valor 3</td>
-          </tr>
+          {listaDespesas.map((item) => (
+            <tr>
+              <td>{`${item.dia}/${item.mes}/${item.ano}`}</td>
+              <td>{item.tipo}</td>
+              <td>{item.descricao}</td>
+              <td>{item.valor}</td>
+            </tr>
+          ))}
         </tbody>
       </TableContainer>
     </>
