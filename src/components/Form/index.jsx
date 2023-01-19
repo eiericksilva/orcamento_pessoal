@@ -36,6 +36,9 @@ const schema = yup
 const Form = ({ children }) => {
   const { listaDespesas, setListaDespesas } = useDespesasContext();
   const { openDialog } = useDialogContext();
+  const populateDB = () => {
+    localStorage.setItem("minhas_despesas", JSON.stringify(listaDespesas));
+  };
   const displayLogUser = () => {
     if (isValid) {
       openDialog({
@@ -52,8 +55,11 @@ const Form = ({ children }) => {
 
   const onSubmit = (newRegister) => {
     setListaDespesas([...listaDespesas, newRegister]);
-    localStorage.setItem("minhas_despesas", JSON.stringify(listaDespesas));
   };
+
+  useEffect(() => {
+    populateDB();
+  }, [listaDespesas]);
 
   const {
     register,
