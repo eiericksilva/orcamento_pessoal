@@ -49,24 +49,10 @@ const Form = ({ children }) => {
       });
     }
   };
-  useEffect(() => {
-    getLocalStorage();
-  }, []);
+
   const onSubmit = (newRegister) => {
     setListaDespesas([...listaDespesas, newRegister]);
-    saveLocalDespesas();
-  };
-  const saveLocalDespesas = () => {
     localStorage.setItem("minhas_despesas", JSON.stringify(listaDespesas));
-  };
-  const getLocalStorage = () => {
-    let localDespesas = localStorage.getItem("minhas_despesas");
-    if (!localDespesas) {
-      localStorage.setItem("minhas_despesas", JSON.stringify([]));
-    } else {
-      localDespesas = JSON.parse(localDespesas);
-      setListaDespesas(localDespesas);
-    }
   };
 
   const {
