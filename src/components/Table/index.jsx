@@ -4,9 +4,7 @@ import { TableContainer } from "./styles";
 
 const Table = () => {
   const { listaDespesas } = useDespesasContext();
-  useEffect(() => {
-    console.log(listaDespesas);
-  }, []);
+
   return (
     <>
       <TableContainer>
@@ -21,7 +19,7 @@ const Table = () => {
         </thead>
         <tbody>
           {listaDespesas.map((item) => (
-            <tr>
+            <tr key={crypto.randomUUID}>
               <td>{`${item.dia}/${item.mes}/${item.ano}`}</td>
               <td>{item.tipo}</td>
               <td>{item.descricao}</td>
