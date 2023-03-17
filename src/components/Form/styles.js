@@ -5,8 +5,8 @@ export const FormContainer = styled.form`
   flex-direction: column;
   gap: 16px;
   padding: 20px;
-  width: 50%;
-  margin: 20px auto;
+  width: 30%;
+  height: 80%;
   border-radius: 12px;
   background-color: #132f4c;
 

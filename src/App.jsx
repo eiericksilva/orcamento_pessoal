@@ -1,29 +1,32 @@
-import { BrowserRouter } from "react-router-dom";
-import { FRoutes } from "./routes";
 import { useEffect } from "react";
 import { useDespesasContext } from "./context/DespesasContext";
-import { GlobalStyle } from "./styles/global";
+import Form from "./components/Form";
+import Header from "./components/Header";
+import Table from "./components/Table";
+import "../src/styles/App.css";
+
 const App = () => {
   const { listaDespesas, setListaDespesas } = useDespesasContext();
-  const populateDB = () => {
-    let localDespesas = localStorage.getItem("minhas_despesas");
 
-    if (!localDespesas) {
-      console.log("array vazio setado no minhas_despesas");
-      localStorage.setItem("minhas_despesas", JSON.stringify([]));
-    } else {
-      localStorage.setItem("minhas_despesas", JSON.stringify(listaDespesas));
-      console.log("localDespesas do populateDB", listaDespesas);
-    }
-  };
   useEffect(() => {
-    populateDB();
+    const despesaSalva = localStorage.getItem("lista_despesas");
+    if (despesaSalva) {
+      setListaDespesas(JSON.parse(despesaSalva));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("lista_despesas", JSON.stringify(listaDespesas));
   }, [listaDespesas]);
+
   return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <FRoutes />
-    </BrowserRouter>
+    <div className="Container">
+      <Header />
+      <div className="Body">
+        <Form />
+        <Table />
+      </div>
+    </div>
   );
 };
 

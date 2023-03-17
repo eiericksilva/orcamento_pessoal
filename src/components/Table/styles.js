@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const TableContainer = styled.table`
   border: none;
   background-color: #132f4c;
-  width: 80%;
-  margin: 0 auto;
+  width: 70%;
+  max-height: 100%;
   overflow-y: auto;
-  padding: 10px;
+  padding: 20px;
 
   caption {
     text-transform: uppercase;
@@ -30,9 +30,9 @@ export const TableContainer = styled.table`
 
   td {
     color: #ffffff;
-    height: 30px;
     text-align: center;
     vertical-align: center;
     border-bottom: 1px solid #ffffff;
+    vertical-align: top;
   }
 `;

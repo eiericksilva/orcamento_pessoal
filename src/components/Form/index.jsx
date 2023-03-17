@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FormContainer } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useDialogContext } from "../../context/DialogContext";
 import DialogComponent from "../Dialog/DialogComponent";
+import { useDialogContext } from "../../context/DialogContext";
 import { useDespesasContext } from "../../context/DespesasContext";
 
 const schema = yup
@@ -50,8 +50,9 @@ const Form = ({ children }) => {
     }
   };
 
-  const onSubmit = (newRegister) => {
-    setListaDespesas([...listaDespesas, newRegister]);
+  const onSubmit = (novadespesa) => {
+    setListaDespesas([...listaDespesas, novadespesa]);
+    console.log("newItemAdd");
   };
 
   const {

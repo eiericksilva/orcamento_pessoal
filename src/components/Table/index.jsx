@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDespesasContext } from "../../context/DespesasContext";
 import { TableContainer } from "./styles";
 
@@ -8,7 +8,6 @@ const Table = () => {
   return (
     <>
       <TableContainer>
-        <caption>Lista de Despesas</caption>
         <thead>
           <tr>
             <th>Data</th>
