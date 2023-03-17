@@ -1,9 +1,21 @@
-import React from "react";
-import { useDespesasContext } from "../../context/DespesasContext";
+import React, { useEffect } from "react";
 import { TableContainer } from "./styles";
 
-const Table = () => {
-  const { listaDespesas } = useDespesasContext();
+const Table = ({ listaDespesas, setListaDespesas }) => {
+  useEffect(() => {
+    getLocalDespesas();
+  }, []);
+
+  const getLocalDespesas = () => {
+    let localDespesas = localStorage.getItem("despesas");
+
+    if (localDespesas === null) {
+      localStorage.setItem("despesas", JSON.stringify([]));
+    } else {
+      localDespesas = JSON.parse(localDespesas);
+      setListaDespesas(localDespesas);
+    }
+  };
 
   return (
     <>
@@ -18,7 +30,7 @@ const Table = () => {
         </thead>
         <tbody>
           {listaDespesas.map((item) => (
-            <tr key={crypto.randomUUID}>
+            <tr key={parseInt(Math.random() * 10000)}>
               <td>{`${item.dia}/${item.mes}/${item.ano}`}</td>
               <td>{item.tipo}</td>
               <td>{item.descricao}</td>

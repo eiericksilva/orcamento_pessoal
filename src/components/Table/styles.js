@@ -8,6 +8,10 @@ export const TableContainer = styled.table`
   overflow-y: auto;
   padding: 20px;
 
+  @media (max-width: 1000px) {
+    width: 80%;
+    margin: 0 auto;
+  }
   caption {
     text-transform: uppercase;
     font-size: 1.5rem;

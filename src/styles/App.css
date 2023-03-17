@@ -1,9 +1,18 @@
 .Container {
     background-color: #001E3C;
+    
 }
+
+
 .Body {
     background-color: #132F4C;
     margin: 20px;
     display: flex;
     gap: 20px;
 }
+    @media (max-width: 1000px) {
+        .Body {
+          display: flex;
+          flex-direction: column;
+        }
+      }

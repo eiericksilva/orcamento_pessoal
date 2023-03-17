@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, LogoContainer } from "./styles";
 import Logo from "../../assets/images/eiericksilva.png";
 

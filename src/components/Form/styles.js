@@ -10,6 +10,11 @@ export const FormContainer = styled.form`
   border-radius: 12px;
   background-color: #132f4c;
 
+  @media (max-width: 1000px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   input,
   select,
   textarea,

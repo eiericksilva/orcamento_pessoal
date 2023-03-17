@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DialogComponent from "../Dialog/DialogComponent";
 import { useDialogContext } from "../../context/DialogContext";
-import { useDespesasContext } from "../../context/DespesasContext";
 
 const schema = yup
   .object({
@@ -33,8 +32,7 @@ const schema = yup
   })
   .required();
 
-const Form = ({ children }) => {
-  const { listaDespesas, setListaDespesas } = useDespesasContext();
+const Form = ({ children, listaDespesas, setListaDespesas }) => {
   const { openDialog } = useDialogContext();
   const displayLogUser = () => {
     if (isValid) {
@@ -63,6 +61,13 @@ const Form = ({ children }) => {
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    saveLocalDespesas();
+  }, [listaDespesas]);
+
+  const saveLocalDespesas = () => {
+    localStorage.setItem("despesas", JSON.stringify(listaDespesas));
+  };
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <input placeholder="Ano" name="ano" {...register("ano")} />
