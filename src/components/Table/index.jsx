@@ -1,21 +1,10 @@
 import React, { useEffect } from "react";
 import { TableContainer } from "./styles";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Table = ({ listaDespesas, setListaDespesas }) => {
-  useEffect(() => {
-    getLocalDespesas();
-  }, []);
-
-  const getLocalDespesas = () => {
-    let localDespesas = localStorage.getItem("despesas");
-
-    if (localDespesas === null) {
-      localStorage.setItem("despesas", JSON.stringify([]));
-    } else {
-      localDespesas = JSON.parse(localDespesas);
-      setListaDespesas(localDespesas);
-    }
-  };
+  const [data] = useLocalStorage("despesas", listaDespesas);
+  console.log(data);
 
   return (
     <>
@@ -29,14 +18,15 @@ const Table = ({ listaDespesas, setListaDespesas }) => {
           </tr>
         </thead>
         <tbody>
-          {listaDespesas.map((item) => (
-            <tr key={parseInt(Math.random() * 10000)}>
-              <td>{`${item.dia}/${item.mes}/${item.ano}`}</td>
-              <td>{item.tipo}</td>
-              <td>{item.descricao}</td>
-              <td>{item.valor}</td>
-            </tr>
-          ))}
+          {data &&
+            data.map((item) => (
+              <tr key={parseInt(Math.random() * 10000)}>
+                <td>{`${item.dia}/${item.mes}/${item.ano}`}</td>
+                <td>{item.tipo}</td>
+                <td>{item.descricao}</td>
+                <td>{item.valor}</td>
+              </tr>
+            ))}
         </tbody>
       </TableContainer>
     </>
