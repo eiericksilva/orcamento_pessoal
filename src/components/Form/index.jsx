@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DialogComponent from "../Dialog/DialogComponent";
 import { useDialogContext } from "../../context/DialogContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const schema = yup
   .object({
@@ -33,6 +34,7 @@ const schema = yup
   .required();
 
 const Form = ({ children, listaDespesas, setListaDespesas }) => {
+  const [data, setData] = useLocalStorage("despesas", listaDespesas);
   const { openDialog } = useDialogContext();
   const displayLogUser = () => {
     if (isValid) {
@@ -49,7 +51,7 @@ const Form = ({ children, listaDespesas, setListaDespesas }) => {
   };
 
   const onSubmit = (novadespesa) => {
-    setListaDespesas([...listaDespesas, novadespesa]);
+    setData([...data, novadespesa]);
     console.log("newItemAdd");
   };
 
@@ -61,13 +63,13 @@ const Form = ({ children, listaDespesas, setListaDespesas }) => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
+  /*  useEffect(() => {
     saveLocalDespesas();
   }, [listaDespesas]);
 
   const saveLocalDespesas = () => {
     localStorage.setItem("despesas", JSON.stringify(listaDespesas));
-  };
+  }; */
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <input placeholder="Ano" name="ano" {...register("ano")} />

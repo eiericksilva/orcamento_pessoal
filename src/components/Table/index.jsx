@@ -3,8 +3,10 @@ import { TableContainer } from "./styles";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Table = ({ listaDespesas, setListaDespesas }) => {
+  useEffect(() => {
+    console.log("data", data);
+  }, [listaDespesas]);
   const [data] = useLocalStorage("despesas", listaDespesas);
-  console.log(data);
 
   return (
     <>
